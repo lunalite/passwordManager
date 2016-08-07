@@ -4,5 +4,7 @@ Update 5/8/2016
 
 Snapshot:
 
-python passwordManager <--> nodeJS API <--> mongoDB server
-      chrome+local          Use heroku      mlab ifpossible
+JAVA passwordManager <--> nodeJS API <--> mongoDB server
+
+Focus is on JAVA GUI using JavaFX. I'll be using Maven for educational purposes.
+       
