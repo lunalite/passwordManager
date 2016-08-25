@@ -46,6 +46,9 @@ public class MainApp {
         }
     }
 
+    /**
+     * Calls for MenuManager.printMenu() while passing in the instantiated managers.
+     */
     public static void callForPrintMenu() {
         RetrievalManager retrievalManager = new RetrievalManager();
         MenuManager.printMenu(retrievalManager);

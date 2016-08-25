@@ -25,6 +25,12 @@ public class AccountManager {
     };
 
     //TODO: Add frequently used user/pw/email
+
+    /**
+     * Calls for query from user input in order to get the account details.
+     * 
+     * @return AccountDetails from AccountManager.CheckAccountDetails() 
+     */
     public static List<String> setAccountDetails() {
         AccountDetails = new ArrayList();
         for (String query : AccountDetailsQuery) {
@@ -39,6 +45,11 @@ public class AccountManager {
         return AccountManager.CheckAccountDetails();
     }
 
+    /**
+     * Account Details checker which requires user to manually see if they have entered the right information.
+     * 
+     * @return AccountDetails
+     */
     public static List<String> CheckAccountDetails() {
         System.out.println("Please check if the details are correct:");
         Iterator<String> accountItr = AccountDetails.iterator();
