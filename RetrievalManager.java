@@ -5,19 +5,43 @@
  */
 package basicpwmanager;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
 /**
  *
  * @author HD
  */
-
 //TODO retrieve after searching through dictionary. 
 //TODO Storing of sensitive information 
 public class RetrievalManager {
+
     private List<Map<String, String>> storageAcc;
-    
+
     public RetrievalManager() {
         storageAcc = new ArrayList();
     }
-    
+
+    public void storeAccountDetail(List<String> accountDetails) {
+        //TODO call for searchManager and check if its present, else add
+        /*
+        if (present) {
+            do nothing
+        } else {*/
+        Map<String, String> tempAccountMap = new HashMap<String, String>();
+
+        Util.AccountStoringFormatKeyResetItr();
+        while (Util.AccountStoringFormatKeyItr.hasNext()) {
+            tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), accountDetails.remove(0));
+        }
+
+        /*for (String key : tempAccountMap.keySet()) {
+            System.out.println(key + ": " + tempAccountMap.get(key));
+        }*/
+
+        //}
+    }
+
 }

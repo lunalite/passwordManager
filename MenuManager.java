@@ -6,6 +6,8 @@
 package basicpwmanager;
 
 import static java.lang.Integer.parseInt;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -33,10 +35,15 @@ public class MenuManager {
             switch (selection) {
                 case "1":
                     System.out.println("Searching...");
+                    System.out.println("Please input detail to be searched:");
                     break;
                 case "2":
                     System.out.println("Calling AccountManager...");
-                    AccountManager.setAccountDetails();
+                    List<String> accDet = AccountManager.setAccountDetails();
+                    if (null == accDet) {
+                        break;
+                    }
+                    retrievalManager.storeAccountDetail(accDet);
                     break;
                 case "3":
                     System.out.println("Exiting...");

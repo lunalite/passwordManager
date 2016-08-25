@@ -25,7 +25,7 @@ public class MainApp {
 
         System.out.print("Please input master password: ");
         int counter = 3;
-        
+
         do {
             String masterPass = Util.sc.next();
             if (masterPass.equals(secret)) {
@@ -37,15 +37,18 @@ public class MainApp {
                 counter--;
             }
         } while (counter > 0);
-        
+
         if (counter == 0) {
             System.out.println("You have entered the incorrect password far too many times.");
         } else {
             // TODO call for security manager, initialise it, and decode the dictionary for faster search
-            
-            RetrievalManager retrievalManager = new RetrievalManager();
-            MenuManager.printMenu(retrievalManager);
+            MainApp.callForPrintMenu();
         }
+    }
+
+    public static void callForPrintMenu() {
+        RetrievalManager retrievalManager = new RetrievalManager();
+        MenuManager.printMenu(retrievalManager);
     }
 
 }
