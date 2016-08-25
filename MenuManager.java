@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public class MenuManager {
 
     /**
-     * printMenu() method for printing out the possible options
-     * 
+     * printMenu() method for printing out the possible options.
+     *
      * @param retrievalManager
      */
     public static void printMenu(RetrievalManager retrievalManager) {
@@ -41,14 +41,15 @@ public class MenuManager {
                     break;
                 case "2":
                     System.out.println("Calling AccountManager...");
-                    List<String> accDet = AccountManager.setAccountDetails();
+                    List<String> accDet = ListOfData.AccountDetails; //AccountManager.setAccountDetails();
                     if (null == accDet) {
                         break;
                     }
-                    retrievalManager.storeAccountDetail(accDet);
+                    retrievalManager.storeLocalAccountDetails(accDet);
                     break;
                 case "3":
                     System.out.println("Exiting...");
+                    retrievalManager.saveAccountDetails();
                     return;
                 default:
                     System.out.println("Please input the right option.");

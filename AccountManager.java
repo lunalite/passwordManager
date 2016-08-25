@@ -27,7 +27,7 @@ public class AccountManager {
     //TODO: Add frequently used user/pw/email
 
     /**
-     * calls for query from user input in order to get the account details
+     * Calls for query from user input in order to get the account details.
      * 
      * @return AccountDetails from AccountManager.CheckAccountDetails() 
      */
@@ -46,7 +46,7 @@ public class AccountManager {
     }
 
     /**
-     * Account Details checker which requires user to manually see if they have entered the right information
+     * Account Details checker which requires user to manually see if they have entered the right information.
      * 
      * @return AccountDetails
      */
