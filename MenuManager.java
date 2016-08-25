@@ -17,6 +17,8 @@ public class MenuManager {
 
     /**
      * printMenu() method for printing out the possible options
+     * 
+     * @param retrievalManager
      */
     public static void printMenu(RetrievalManager retrievalManager) {
 

@@ -16,9 +16,24 @@ import java.util.Scanner;
  */
 public class Util {
 
+    /**
+     * Static Scanner that simplifies taking in of input
+     */
     public static Scanner sc = new Scanner(System.in);
+
+    /**
+     * The List of keys of Account Information that would be mapped later
+     */
     public static List<String> AccountStoringFormatKey = new ArrayList();
+
+    /**
+     * Iterator that lists the keys of Account Information that would be further mapped
+     */
     public static Iterator<String> AccountStoringFormatKeyItr;
+    
+    /**
+     * Resets the iterator so that the cursor points back to the first key
+     */
     public static void AccountStoringFormatKeyResetItr() {
         AccountStoringFormatKeyItr = AccountStoringFormatKey.iterator();
     }

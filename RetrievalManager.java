@@ -20,10 +20,18 @@ public class RetrievalManager {
 
     private List<Map<String, String>> storageAcc;
 
+    /**
+     * Constructor that instantiates the storageAcc storing the list of AccountDetails mapping
+     */
     public RetrievalManager() {
         storageAcc = new ArrayList();
     }
 
+    /**
+     * Storing AccountDetails into the private List of Map<String, String> storageAcc
+     * 
+     * @param accountDetails
+     */
     public void storeAccountDetail(List<String> accountDetails) {
         //TODO call for searchManager and check if its present, else add
         /*
