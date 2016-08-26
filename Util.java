@@ -5,6 +5,9 @@
  */
 package basicpwmanager;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,9 +19,30 @@ import java.util.Scanner;
  */
 public class Util {
 
+    /* Please set the following variables*/
+    
+    public static File File = new File("secretFile");
+    
+    /* End of configuration*/
+    
     public static Scanner sc = new Scanner(System.in);
+    public static GsonBuilder Builder = new GsonBuilder();
+    public static Gson Gson = Util.Builder.create();
+
+    /**
+     * The List of keys of Account Information that would be mapped later.
+     */
     public static List<String> AccountStoringFormatKey = new ArrayList();
+
+    /**
+     * Iterator that lists the keys of Account Information that would be further
+     * mapped.
+     */
     public static Iterator<String> AccountStoringFormatKeyItr;
+
+    /**
+     * Resets the iterator so that the cursor points back to the first key.
+     */
     public static void AccountStoringFormatKeyResetItr() {
         AccountStoringFormatKeyItr = AccountStoringFormatKey.iterator();
     }
