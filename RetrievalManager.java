@@ -27,7 +27,6 @@ import java.util.Iterator;
 public class RetrievalManager {
 
     private List<Map<String, String>> storageAccMap;
-    private List<Account> storageAcc;
 
     /**
      * Constructor that instantiates the storageAcc storing the list of
@@ -36,17 +35,13 @@ public class RetrievalManager {
     public RetrievalManager() {
         storageAccMap = new ArrayList();
         List<Account> tempAccountDetailsList = loadAccountDetails();
-        if (null == tempAccountDetailsList) {
-            storageAcc = new ArrayList();
-        } else {
-            storageAcc = new ArrayList(tempAccountDetailsList);
-        }
+        this.storageAccToMap(tempAccountDetailsList);
     }
 
     /**
      * Converts account details from storageAcc to storageAccMap
      */
-    private void storageAccToMap() {
+    private void storageAccToMap(List<Account> storageAcc) {
         Iterator<Account> storageAccItr = storageAcc.iterator();
         while (storageAccItr.hasNext()) {
             storageAccMap.add(storageAccItr.next().getMap());
@@ -88,7 +83,6 @@ public class RetrievalManager {
             if (!Util.File.exists()) {
                 Util.File.createNewFile();
             }
-            this.storageAccToMap();
             Util.Gson.toJson(storageAccMap, writer);
 
         } catch (IOException e) {
@@ -98,7 +92,8 @@ public class RetrievalManager {
 
     /**
      * Loading of account details from file at Util.File
-     * @return 
+     *
+     * @return
      */
     public List<Account> loadAccountDetails() {
         try (BufferedReader bReader = new BufferedReader(new FileReader(Util.File))) {
@@ -111,15 +106,18 @@ public class RetrievalManager {
         }
         return null;
     }
-    
+
+    public List<Map<String, String>> getStorageAccMap() {
+
+    }
+
     /**
      * Printing of all account details mapped.
      */
     public void printStorageAccMap() {
-        this.storageAccToMap();
         Iterator storageAccMapItr = storageAccMap.iterator();
         while (storageAccMapItr.hasNext()) {
             System.out.println(storageAccMapItr.next());
-        }        
+        }
     }
 }
