@@ -5,6 +5,7 @@
  */
 package basicpwmanager;
 
+import basicpwmanager.models.Account;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,7 +18,9 @@ import java.util.regex.Pattern;
 public class AccountManager {
 
     private static List<String> AccountDetails;
-    private static String[] AccountDetailsQuery = {"Please enter the type of service: ",
+    private static Account AccountObj;
+    private static String[] AccountDetailsQuery = {
+        "Please enter the type of service: ",
         "Please enter your username: ",
         "Please enter your current password: ",
         "Please enter the registered email: ",

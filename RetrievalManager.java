@@ -5,13 +5,15 @@
  */
 package basicpwmanager;
 
+import basicpwmanager.models.Account;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.Writer;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -23,15 +25,28 @@ import java.util.HashMap;
 //TODO Storing of sensitive information 
 public class RetrievalManager {
 
-    private List<Map<String, String>> storageAcc;
+    private List<Map<String, String>> storageAccMap;
+    private List<Account> storageAcc;
 
     /**
      * Constructor that instantiates the storageAcc storing the list of
      * AccountDetails mapping.
      */
     public RetrievalManager() {
-        storageAcc =  new ArrayList();
-        //loadAccountDetails();
+        storageAccMap = new ArrayList();
+        List<Account> tempAccountDetailsList = loadAccountDetails();
+        if (null == tempAccountDetailsList) {
+            storageAcc = new ArrayList();
+        } else {
+            storageAcc = new ArrayList(tempAccountDetailsList);
+        }
+        for (Account details: storageAcc) {
+            System.out.println(details.getUsername());
+            System.out.println(details.getEmail());
+            System.out.println(details.getMisc());
+            System.out.println(details.getPassword());
+            System.out.println(details.getService());
+        }
     }
 
     /**
@@ -53,7 +68,7 @@ public class RetrievalManager {
             tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), accountDetails.remove(0));
         }
 
-        storageAcc.add(tempAccountMap);
+        storageAccMap.add(tempAccountMap);
         /*for (String key : tempAccountMap.keySet()) {
             System.out.println(key + ": " + tempAccountMap.get(key));
         }*/
@@ -68,28 +83,23 @@ public class RetrievalManager {
             if (!Util.File.exists()) {
                 Util.File.createNewFile();
             }
-            
-            Util.Gson.toJson(storageAcc, writer);
+
+            Util.Gson.toJson(storageAccMap, writer);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void loadAccountDetails() {
-        
-        try (FileInputStream fis = new FileInputStream(Util.File)) {
-            
-            System.out.println("Total file size to read (in bytes) : "+ fis.available());
+    public List<Account> loadAccountDetails() {
 
-            int content;
-            
-            while ((content=fis.read()) != -1) {
-                System.out.println((char)content);
-            }
+        try (BufferedReader bReader = new BufferedReader(new FileReader(Util.File))) {
+            Account[] accountObj = Util.Gson.fromJson(bReader, Account[].class);
+            List<Account> tempAccountDetailsList = Arrays.asList(accountObj);
+            return tempAccountDetailsList;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
-
 }
