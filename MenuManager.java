@@ -29,7 +29,8 @@ public class MenuManager {
             System.out.println("Please select the following:");
             System.out.println("1) Search");
             System.out.println("2) Store");
-            System.out.println("3) Exit");
+            System.out.println("3) Print");
+            System.out.println("4) Exit");
             System.out.println("============================");
 
             selection = Util.sc.next();
@@ -41,13 +42,18 @@ public class MenuManager {
                     break;
                 case "2":
                     System.out.println("Calling AccountManager...");
-                    List<String> accDet = ListOfData.AccountDetails; //AccountManager.setAccountDetails();
+                    List<String> accDet = AccountManager.setAccountDetails();
+//                    List<String> accDet = ListOfData.AccountDetails;
                     if (null == accDet) {
                         break;
                     }
                     retrievalManager.storeLocalAccountDetails(accDet);
                     break;
                 case "3":
+                    System.out.println("Printing...");
+                    retrievalManager.printStorageAccMap();
+                    break;
+                case "4":
                     System.out.println("Exiting...");
                     retrievalManager.saveAccountDetails();
                     return;

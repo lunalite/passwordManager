@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -40,13 +41,17 @@ public class RetrievalManager {
         } else {
             storageAcc = new ArrayList(tempAccountDetailsList);
         }
-        for (Account details: storageAcc) {
-            System.out.println(details.getUsername());
-            System.out.println(details.getEmail());
-            System.out.println(details.getMisc());
-            System.out.println(details.getPassword());
-            System.out.println(details.getService());
+    }
+
+    /**
+     * Converts account details from storageAcc to storageAccMap
+     */
+    private void storageAccToMap() {
+        Iterator<Account> storageAccItr = storageAcc.iterator();
+        while (storageAccItr.hasNext()) {
+            storageAccMap.add(storageAccItr.next().getMap());
         }
+        storageAcc = new ArrayList();
     }
 
     /**
@@ -83,7 +88,7 @@ public class RetrievalManager {
             if (!Util.File.exists()) {
                 Util.File.createNewFile();
             }
-
+            this.storageAccToMap();
             Util.Gson.toJson(storageAccMap, writer);
 
         } catch (IOException e) {
@@ -91,15 +96,30 @@ public class RetrievalManager {
         }
     }
 
+    /**
+     * Loading of account details from file at Util.File
+     * @return 
+     */
     public List<Account> loadAccountDetails() {
-
         try (BufferedReader bReader = new BufferedReader(new FileReader(Util.File))) {
             Account[] accountObj = Util.Gson.fromJson(bReader, Account[].class);
             List<Account> tempAccountDetailsList = Arrays.asList(accountObj);
             return tempAccountDetailsList;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    /**
+     * Printing of all account details mapped.
+     */
+    public void printStorageAccMap() {
+        this.storageAccToMap();
+        Iterator storageAccMapItr = storageAccMap.iterator();
+        while (storageAccMapItr.hasNext()) {
+            System.out.println(storageAccMapItr.next());
+        }        
     }
 }
