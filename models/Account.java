@@ -22,6 +22,14 @@ public class Account {
     private String email;
     private String misc;
 
+    public Account(String service, String username, String password, String email, String misc) {
+        this.service = service;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.misc = misc;
+    }
+    
     public String getService() {
         return service;
     }
@@ -42,15 +50,15 @@ public class Account {
         return misc;
     }
 
-    public Map<String, String> getMap() {
-        Map<String, String> tempAccountMap = new HashMap();
+    public Map<ACC_TYPE, String> getMap() {
+        Map<ACC_TYPE, String> tempAccountMap = new HashMap();
 
         Util.AccountStoringFormatKeyResetItr();
         tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), service);
         tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), username);
         tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), password);
         tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), email);
-        tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), misc);
+        tempAccountMap.put(Util.AccountStoringFormatKeyItr.next(), misc);       
         return tempAccountMap;
     }
 

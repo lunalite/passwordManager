@@ -5,6 +5,7 @@
  */
 package basicpwmanager;
 
+import basicpwmanager.models.ACC_TYPE;
 import basicpwmanager.models.Account;
 import java.util.List;
 import java.util.ArrayList;
@@ -18,27 +19,23 @@ import java.util.regex.Pattern;
 public class AccountManager {
 
     private static List<String> AccountDetails;
-    private static Account AccountObj;
-    private static String[] AccountDetailsQuery = {
-        "Please enter the type of service: ",
-        "Please enter your username: ",
-        "Please enter your current password: ",
-        "Please enter the registered email: ",
-        "Are there any other details required?: "
-    };
+//    private static Account AccountObj;
 
     //TODO: Add frequently used user/pw/email
 
     /**
      * Calls for query from user input in order to get the account details.
      * 
-     * @return AccountDetails from AccountManager.CheckAccountDetails() 
+     * @return AccountDetails from AccountManager.CheckAccountDetails(). If '-1' is inputted, returns null.
      */
     public static List<String> setAccountDetails() {
         AccountDetails = new ArrayList();
-        for (String query : AccountDetailsQuery) {
-            System.out.println(query);
-            String input = Util.sc.next();
+        
+        //flushes the null object
+        Util.sc.nextLine();
+        for (ACC_TYPE accountQuery : ACC_TYPE.values()) {
+            System.out.println(accountQuery.toQuery());
+            String input = Util.sc.nextLine();
             if (input.equals("-1")) {
                 return null;
             } else {
@@ -51,7 +48,7 @@ public class AccountManager {
     /**
      * Account Details checker which requires user to manually see if they have entered the right information.
      * 
-     * @return AccountDetails
+     * @return AccountDetails private variable
      */
     public static List<String> CheckAccountDetails() {
         System.out.println("Please check if the details are correct:");

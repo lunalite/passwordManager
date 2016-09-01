@@ -5,9 +5,7 @@
  */
 package basicpwmanager;
 
-import static java.lang.Integer.parseInt;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  *
@@ -38,7 +36,7 @@ public class MenuManager {
             switch (selection) {
                 case "1":
                     System.out.println("Searching...");
-                    System.out.println("Please input detail to be searched:");
+                    SearchManager.searchCall();
                     break;
                 case "2":
                     System.out.println("Calling AccountManager...");
@@ -60,6 +58,6 @@ public class MenuManager {
                 default:
                     System.out.println("Please input the right option.");
             }
-        } while (selection != "3");
+        } while (!"4".equals(selection));
     }
 }

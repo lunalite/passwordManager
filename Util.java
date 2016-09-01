@@ -5,6 +5,7 @@
  */
 package basicpwmanager;
 
+import basicpwmanager.models.ACC_TYPE;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.File;
@@ -32,13 +33,13 @@ public class Util {
     /**
      * The List of keys of Account Information that would be mapped later.
      */
-    public static List<String> AccountStoringFormatKey = new ArrayList();
+    public static List<ACC_TYPE> AccountStoringFormatKey = new ArrayList();
 
     /**
      * Iterator that lists the keys of Account Information that would be further
      * mapped.
      */
-    public static Iterator<String> AccountStoringFormatKeyItr;
+    public static Iterator<ACC_TYPE> AccountStoringFormatKeyItr;
 
     /**
      * Resets the iterator so that the cursor points back to the first key.
@@ -48,10 +49,10 @@ public class Util {
     }
 
     static {
-        AccountStoringFormatKey.add("service");
-        AccountStoringFormatKey.add("userName");
-        AccountStoringFormatKey.add("password");
-        AccountStoringFormatKey.add("email");
-        AccountStoringFormatKey.add("misc");
+        AccountStoringFormatKey.add(ACC_TYPE.SERVICE);
+        AccountStoringFormatKey.add(ACC_TYPE.USERNAME);
+        AccountStoringFormatKey.add(ACC_TYPE.PASSWORD);
+        AccountStoringFormatKey.add(ACC_TYPE.EMAIL);
+        AccountStoringFormatKey.add(ACC_TYPE.MISC);
     }
 }

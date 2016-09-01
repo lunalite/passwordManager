@@ -5,6 +5,7 @@
  */
 package basicpwmanager;
 
+import basicpwmanager.models.ACC_TYPE;
 import basicpwmanager.models.Account;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +27,7 @@ import java.util.Iterator;
 //TODO Storing of sensitive information 
 public class RetrievalManager {
 
-    private List<Map<String, String>> storageAccMap;
+    private List<Map<ACC_TYPE, String>> storageAccMap;
 
     /**
      * Constructor that instantiates the storageAcc storing the list of
@@ -35,7 +36,9 @@ public class RetrievalManager {
     public RetrievalManager() {
         storageAccMap = new ArrayList();
         List<Account> tempAccountDetailsList = loadAccountDetails();
-        this.storageAccToMap(tempAccountDetailsList);
+        if (tempAccountDetailsList != null) {
+            this.storageAccToMap(tempAccountDetailsList);
+        }
     }
 
     /**
@@ -61,7 +64,7 @@ public class RetrievalManager {
         if (present) {
             do nothing
         } else {*/
-        Map<String, String> tempAccountMap = new HashMap<>();
+        Map<ACC_TYPE, String> tempAccountMap = new HashMap<>();
 
         Util.AccountStoringFormatKeyResetItr();
         while (Util.AccountStoringFormatKeyItr.hasNext()) {
@@ -97,18 +100,25 @@ public class RetrievalManager {
      */
     public List<Account> loadAccountDetails() {
         try (BufferedReader bReader = new BufferedReader(new FileReader(Util.File))) {
-            Account[] accountObj = Util.Gson.fromJson(bReader, Account[].class);
-            List<Account> tempAccountDetailsList = Arrays.asList(accountObj);
-            return tempAccountDetailsList;
-
+            Account[] accountArr = Util.Gson.fromJson(bReader, Account[].class);
+            if (accountArr.length != 0) {
+                List<Account> tempAccountDetailsList = Arrays.asList(accountArr);
+                return tempAccountDetailsList;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public List<Map<String, String>> getStorageAccMap() {
-
+    /**
+     * storageAccMap getter
+     *
+     * @return private variable storageAccMap that stores all HashMaps of
+     * storage Account Details
+     */
+    public List<Map<ACC_TYPE, String>> getStorageAccMap() {
+        return storageAccMap;
     }
 
     /**
@@ -117,7 +127,7 @@ public class RetrievalManager {
     public void printStorageAccMap() {
         Iterator storageAccMapItr = storageAccMap.iterator();
         while (storageAccMapItr.hasNext()) {
-            System.out.println(storageAccMapItr.next());
+            System.out.println(storageAccMapItr.next().toString());
         }
     }
 }
