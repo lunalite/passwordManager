@@ -5,6 +5,10 @@
  */
 package basicpwmanager;
 
+import basicpwmanager.models.ACC_TYPE;
+import java.util.Iterator;
+import java.util.Map;
+
 /**
  *
  * @author HD
@@ -12,7 +16,7 @@ package basicpwmanager;
 public class SearchManager {
     //TODO incorporate a search method that allows for regex to be used.
 
-    public static void searchCall() {
+    public static void searchCall(RetrievalManager retrievalManager) {
         int counter = 1;
         String response;
 
@@ -25,28 +29,46 @@ public class SearchManager {
         System.out.println(counter++ + ")Regex");
         do {
             response = Util.sc.next();
-
+            String searchQuery;
             switch (response) {
                 case "-1":
                     return;
                 case "1":
-                    ""
-                    break;
                 case "2":
-                    break;
                 case "3":
-                    break;
                 case "4":
-                    break;
                 case "5":
+                    int selector = Integer.parseInt(response) - 1;
+                    System.out.println(ACC_TYPE.values()[selector].toQuery());
+                    searchQuery = Util.sc.next();
+                    if ("-1".equals(searchQuery)) {
+                        break;
+                    } else {
+                        SearchManager.searchThroughMap(retrievalManager, ACC_TYPE.values()[selector], searchQuery);
+                    }
                     break;
+                    
                 case "6":
                     break;
+
                 default:
                     break;
             }
         } while (true);
 
-    
+    }
+
+    private static Map<ACC_TYPE, String> searchThroughMap(RetrievalManager retrievalManager, ACC_TYPE dataType, String searchQuery) {
+        Iterator<Map<ACC_TYPE, String>> storageAccMapItr = retrievalManager.getStorageAccMap().iterator();
+        int counter = 0;
+        while (storageAccMapItr.hasNext()) {
+            if (storageAccMapItr.next().get(dataType).toLowerCase().contains(
+                    searchQuery.toLowerCase())) {
+                System.out.println(retrievalManager.getStorageAccMap().get(counter));
+            }
+            counter++;
+        }
+
+        return null;
     }
 }

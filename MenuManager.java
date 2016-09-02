@@ -36,7 +36,7 @@ public class MenuManager {
             switch (selection) {
                 case "1":
                     System.out.println("Searching...");
-                    SearchManager.searchCall();
+                    SearchManager.searchCall(retrievalManager);
                     break;
                 case "2":
                     System.out.println("Calling AccountManager...");

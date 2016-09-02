@@ -11,10 +11,10 @@ package basicpwmanager.models;
  */
 public enum ACC_TYPE {
     SERVICE("service", "Please enter the type of service: "),
-    USERNAME("username", "Please enter your username: "),
-    PASSWORD("password", "Please enter your current password: "),
-    EMAIL("email", "Please enter the registered email: "),
-    MISC("misc", "Are there any other details required?: ");
+    USERNAME("username", "Please enter username: "),
+    PASSWORD("password", "Please enter password: "),
+    EMAIL("email", "Please enter email: "),
+    MISC("misc", "Please enter miscellaneous information: ");
 
     private final String _stringRep;
     private final String _query;
